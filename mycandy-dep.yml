@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycandy-deployment
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 75%
+  selector:
+    matchLabels:
+      app: candy-aws
+  template:
+    metadata:
+      labels:
+        app: candy-aws
+    spec:
+      containers:
+      - image: linuxacademycontent/candy-service:3
+        name: candy-aws
+
